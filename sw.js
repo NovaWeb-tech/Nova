@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nova-tech-v1';
+const CACHE_NAME = 'nova-tech-v2';
 const assets = [
   './index.html',
   './logo.png'
@@ -10,6 +10,22 @@ self.addEventListener('install', e => {
       return cache.addAll(assets);
     })
   );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+  self.clientsClaim();
 });
 
 self.addEventListener('fetch', e => {
