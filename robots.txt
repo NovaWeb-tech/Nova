@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://novaweb-tech.github.io/Nova/sitemap.xml
